@@ -61,6 +61,7 @@
 - (void)order_skip;
 - (void)start;
 - (void)stop;
+- (NSString *)decodeBarcodeInImage: (CGImageRef)image;
 
 /**
  * This enables `ZXCapture` to try additional heuristics to decode

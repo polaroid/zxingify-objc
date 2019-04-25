@@ -378,6 +378,34 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   }
 }
 
+- (NSString *)decodeBarcodeInImage: (CGImageRef)image {
+    CGImageRef rotatedImage = [self createRotatedImage:image degrees:self.rotation];
+    
+    ZXCGImageLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage: rotatedImage];
+    CGImageRelease(rotatedImage);
+    
+    ZXHybridBinarizer *binarizer = [[ZXHybridBinarizer alloc] initWithSource:self.invert ? [source invert] : source];
+    
+    ZXBinaryBitmap *bitmap = [[ZXBinaryBitmap alloc] initWithBinarizer:binarizer];
+    
+    NSError *error;
+    ZXResult *result = [self.reader decode:bitmap hints:self.hints error:&error];
+    if (error) {
+        return nil;
+    }
+    if (result) {
+        if (self.delegate) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate captureResult:self result:result];
+            });
+        } else {
+            return result.text;
+        }
+    }
+    
+    return  nil;
+}
+
 - (void)decodeImage: (CGImageRef)image {
   // If scanRect is set, crop the current image to include only the desired rect
   if (!CGRectIsEmpty(self.scanRect)) {
