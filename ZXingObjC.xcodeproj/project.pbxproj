@@ -5497,11 +5497,11 @@
 			};
 			buildConfigurationList = 25403CAD166A96F900E13304 /* Build configuration list for PBXProject "ZXingObjC" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 25403CA8166A96F900E13304;
 			productRefGroup = 25403CB4166A96FA00E13304 /* Products */;
