@@ -211,13 +211,21 @@
 }
 
 - (BOOL)hasFront {
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-  return [devices count] > 1;
+    AVCaptureDeviceDiscoverySession *session = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInTrueDepthCamera,
+                                                                                                                  AVCaptureDeviceTypeBuiltInTelephotoCamera,
+                                                                                                                  AVCaptureDeviceTypeBuiltInWideAngleCamera]
+                                                                                                      mediaType:AVMediaTypeVideo
+                                                                                                       position:AVCaptureDevicePositionFront];
+    return [[session devices] count] > 1;
 }
 
 - (BOOL)hasBack {
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-  return [devices count] > 0;
+    AVCaptureDeviceDiscoverySession *session = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInTrueDepthCamera,
+                                                                                                                  AVCaptureDeviceTypeBuiltInTelephotoCamera,
+                                                                                                                  AVCaptureDeviceTypeBuiltInWideAngleCamera]
+                                                                                                      mediaType:AVMediaTypeVideo
+                                                                                                       position:AVCaptureDevicePositionBack];
+    return [[session devices] count] > 1;
 }
 
 - (BOOL)hasTorch {
@@ -550,7 +558,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   
   AVCaptureDevice *zxd = nil;
   
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+  NSArray *devices = [[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera,
+                                                                                         AVCaptureDeviceTypeBuiltInTelephotoCamera,
+                                                                                         AVCaptureDeviceTypeBuiltInTrueDepthCamera]
+                                                                             mediaType:AVMediaTypeVideo
+                                                                              position:AVCaptureDevicePositionUnspecified] devices];
   
   if ([devices count] > 0) {
     if (self.captureDeviceIndex == -1) {
