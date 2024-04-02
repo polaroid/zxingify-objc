@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "ZXingObjC",
+    platforms: [.iOS(.v12)],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -28,38 +29,38 @@ let package = Package(
                 .headerSearchPath("aztec/decoder"),
                 .headerSearchPath("aztec/detector"),
                 .headerSearchPath("aztec/encoder"),
-                
-                .headerSearchPath("client"),
+
+                    .headerSearchPath("client"),
                 .headerSearchPath("client/result"),
-                
-                .headerSearchPath("common"),
+
+                    .headerSearchPath("common"),
                 .headerSearchPath("common/detector"),
                 .headerSearchPath("common/reedsolomon"),
-                
-                .headerSearchPath("core"),
-                
-                .headerSearchPath("datamatrix"),
+
+                    .headerSearchPath("core"),
+
+                    .headerSearchPath("datamatrix"),
                 .headerSearchPath("datamatrix/decoder"),
                 .headerSearchPath("datamatrix/detector"),
                 .headerSearchPath("datamatrix/encoder"),
-                
-                .headerSearchPath("maxicode"),
+
+                    .headerSearchPath("maxicode"),
                 .headerSearchPath("maxicode/decoder"),
-                
-                .headerSearchPath("multi"),
-                
-                .headerSearchPath("oned"),
+
+                    .headerSearchPath("multi"),
+
+                    .headerSearchPath("oned"),
                 .headerSearchPath("oned/rss"),
                 .headerSearchPath("oned/rss/expanded"),
                 .headerSearchPath("oned/rss/expanded/decoders"),
-                
-                .headerSearchPath("pdf417"),
+
+                    .headerSearchPath("pdf417"),
                 .headerSearchPath("pdf417/decoder"),
                 .headerSearchPath("pdf417/decoder/ec"),
                 .headerSearchPath("pdf417/detector"),
                 .headerSearchPath("pdf417/encoder"),
-                
-                .headerSearchPath("qrcode"),
+
+                    .headerSearchPath("qrcode"),
                 .headerSearchPath("qrcode/decoder"),
                 .headerSearchPath("qrcode/detector"),
                 .headerSearchPath("qrcode/encoder"),
